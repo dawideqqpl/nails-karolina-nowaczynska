@@ -1,0 +1,10 @@
+# Dependencies
+/node_modules
+
+# Build artifacts
+/build
+
+# Miscellaneous
+.env
+npm-debug.log*
+yarn-error.log*

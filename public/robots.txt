@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+Sitemap: %PUBLIC_URL%/sitemap.xml
+
+# Specific rules for common crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block access to admin or sensitive areas if any
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+# Allow access to important resources
+Allow: /static/
+Allow: /images/
+Allow: /css/
+Allow: /js/
