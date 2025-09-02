@@ -1,17 +1,22 @@
 {
   "short_name": "#Nails Karolina",
-  "name": "#Nails Karolina Nowaczyńska - Salon Manicure i Pedicure",
+  "name": "#Nails Karolina Nowaczyńska - Salon manicure i pedicure",
   "description": "Profesjonalny salon manicure i pedicure w Katowicach",
   "icons": [
     {
-      "src": "logo.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     },
     {
-      "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
@@ -19,6 +24,33 @@
   "theme_color": "#e8c2cf",
   "background_color": "#ffffff",
   "orientation": "portrait-primary",
-  "categories": ["beauty", "lifestyle", "business"],
-  "lang": "pl"
+  "categories": ["beauty", "lifestyle"],
+  "lang": "pl",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Umów wizytę",
+      "short_name": "Booksy",
+      "description": "Zarezerwuj termin online przez Booksy",
+      "url": "/",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "description": "Skontaktuj się z salonem",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }

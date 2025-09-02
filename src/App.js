@@ -1,78 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
-  const [isVisible, setIsVisible] = useState({});
-  const [activeSection, setActiveSection] = useState('hero');
+  const [isLoading, setIsLoading] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '-50px 0px'
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
     };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsVisible(prev => ({
-            ...prev,
-            [entry.target.id]: true
-          }));
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
-
-    const sections = document.querySelectorAll('.section');
-    sections.forEach((section) => observer.observe(section));
-
-    return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId).scrollIntoView({
-      behavior: 'smooth'
-    });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const services = [
     {
-      category: "Popularne Usługi",
+      category: "Popularne usługi",
       items: [
         { name: "Manicure Hybrydowy (1 kolor)", price: "120,00 zł", time: "1g 10min" },
-        { name: "Manicure Hybrydowy 1 Kolor Z Opiłowaniem", price: "130,00 zł", time: "1g 15min" },
-        { name: "Korekta Żel (zdobienie)", price: "140,00 - 170,00 zł", time: "1g 40min" },
-        { name: "Korekta Żel (1 kolor)", price: "140,00 zł", time: "1g 30min" }
+        { name: "Manicure Hybrydowy z opiłowaniem po innym salonie", price: "130,00 zł", time: "1g 15min" },
+        { name: "Korekta Żel (1 kolor)", price: "140,00 zł", time: "1g 30min" },
+        { name: "Korekta Żel (zdobienie)", price: "od 140,00 zł", time: "1g 40min" }
       ]
     },
     {
       category: "Paznokcie",
       items: [
-        { name: "Żel na naturalnej płytce (zdobienie)", price: "150,00 - 180,00 zł", time: "1g 30min" },
-        { name: "Przedłużanie Paznokci na Formie (1 kolor)", price: "175,00 zł", time: "1g 50min" },
-        { name: "Manicure Hybrydowy (zdobienie)", price: "130,00 - 160,00 zł", time: "1g 20min" },
-        { name: "Ściągnięcie Hybrydy + Odżywka", price: "75,00 zł", time: "40min" }
+        { name: "Żel na naturalnej płytce (1 kolor)", price: "140,00 zł", time: "1g 15min" },
+        { name: "Żel na naturalnej płytce (zdobienie)", price: "od 150,00 zł", time: "1g 30min" },
+        { name: "Przedłużanie paznokci na formie (1 kolor)", price: "175,00 zł", time: "1g 50min" },
+        { name: "Ściągnięcie hybrydy/żelu + odżywka", price: "75,00 zł", time: "40min" }
       ]
     },
     {
       category: "Pedicure",
       items: [
-        { name: "Pedicure Frezarkowy + Hybryda (1 kolor)", price: "150,00 zł", time: "1g 5min" },
-        { name: "Pedicure Frezarkowy + Hybryda (French/Zdobienie)", price: "160,00 zł", time: "1g 5min" },
-        { name: "Pedicure Hybrydowy (1 kolor)", price: "120,00 zł", time: "50min" },
-        { name: "Pedicure Hybrydowy (French/Zdobienie)", price: "130,00 zł", time: "50min" }
+        { name: "Pedicure frezarkowy + hybryda (1 kolor)", price: "150,00 zł", time: "1g 5min" },
+        { name: "Pedicure hybrydowy (1 kolor)", price: "120,00 zł", time: "50min" },
+        { name: "Pedicure hybrydowy (French/zdobienie)", price: "130,00 zł", time: "50min" },
+        { name: "Pedicure z opiłowaniem po innym salonie", price: "160,00 zł", time: "1g 5min" }
       ]
     },
     {
-      category: "Przedłużanie Paznokci",
+      category: "Przedłużanie paznokci",
       items: [
-        { name: "Przedłużanie paznokci obgryzionych – forma (1 kolor)", price: "180,00 zł", time: "1g 40min" },
-        { name: "Przedłużanie paznokci obgryzionych – forma (zdobienie)", price: "190,00 - 220,00 zł", time: "1g 50min" },
-        { name: "Przedłużanie Paznokci Na Formie (Zdobienie)", price: "180,00 zł", time: "1g 50min" }
+        { name: "Przedłużanie paznokci obgryzionych (1 kolor)", price: "180,00 zł", time: "1g 40min" },
+        { name: "Przedłużanie paznokci obgryzionych (zdobienie)", price: "od 190,00 zł", time: "1g 50min" },
+        { name: "Przedłużanie na formie (zdobienie)", price: "180,00 zł", time: "1g 50min" }
       ]
     },
     {
-      category: "Inne Usługi",
+      category: "Inne usługi",
       items: [
         { name: "Naprawa 1 paznokcia", price: "15,00 zł", time: "15min" }
       ]
@@ -89,196 +80,184 @@ const App = () => {
     { day: "Niedziela", hours: "Zamknięte" }
   ];
 
-  return (
-    <div className="app">
-      <nav className="nav">
-        <div className="nav__container">
-          <div className="nav__logo">
-            <img src="/logo.png" alt="#Nails Karolina Nowaczyńska" className="nav__logo-img" />
+  if (isLoading) {
+    return (
+      <div className="loader">
+        <div className="loader__content">
+          <div className="loader__logo">#Nails</div>
+          <div className="loader__bar">
+            <div className="loader__progress"></div>
           </div>
-          <ul className="nav__menu">
-            <li className={`nav__item ${activeSection === 'hero' ? 'nav__item--active' : ''}`}>
-              <button className="nav__link" onClick={() => scrollToSection('hero')}>Start</button>
-            </li>
-            <li className={`nav__item ${activeSection === 'about' ? 'nav__item--active' : ''}`}>
-              <button className="nav__link" onClick={() => scrollToSection('about')}>O nas</button>
-            </li>
-            <li className={`nav__item ${activeSection === 'services' ? 'nav__item--active' : ''}`}>
-              <button className="nav__link" onClick={() => scrollToSection('services')}>Usługi</button>
-            </li>
-            <li className={`nav__item ${activeSection === 'contact' ? 'nav__item--active' : ''}`}>
-              <button className="nav__link" onClick={() => scrollToSection('contact')}>Kontakt</button>
-            </li>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      <nav className="navbar">
+        <div className="navbar__container">
+          <div className="navbar__logo">
+            <img src="/logo.png" alt="#Nails Karolina Nowaczyńska" className="navbar__logo-img" />
+            <span className="navbar__logo-text">#Nails</span>
+          </div>
+          <ul className="navbar__menu">
+            <li><button onClick={() => scrollToSection('hero')} className="navbar__link">Start</button></li>
+            <li><button onClick={() => scrollToSection('about')} className="navbar__link">O nas</button></li>
+            <li><button onClick={() => scrollToSection('services')} className="navbar__link">Usługi</button></li>
+            <li><button onClick={() => scrollToSection('contact')} className="navbar__link">Kontakt</button></li>
           </ul>
         </div>
       </nav>
 
-      <section id="hero" className="section hero">
+      <section id="hero" className="hero">
+        <div className="hero__background" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
+          <div className="hero__shape hero__shape--1"></div>
+          <div className="hero__shape hero__shape--2"></div>
+          <div className="hero__shape hero__shape--3"></div>
+        </div>
         <div className="hero__container">
           <div className="hero__content">
-            <div className={`hero__text ${isVisible.hero ? 'animate-in' : ''}`}>
-              <h1 className="hero__title">
-                <span className="hero__title-main">#Nails</span>
-                <span className="hero__title-sub">Karolina Nowaczyńska</span>
-              </h1>
-              <p className="hero__description">
-                Profesjonalny salon manicure i pedicure w Katowicach. 
-                Tworzymy piękne paznokcie z pasją i precyzją.
-              </p>
-              <div className="hero__buttons">
-                <a href="https://booksy.com/pl-pl/71317_nails-karolina-nowaczynska_paznokcie_11597_katowice" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   className="btn btn--primary">
-                  Umów wizytę
-                </a>
-                <button className="btn btn--secondary" onClick={() => scrollToSection('services')}>
-                  Nasze usługi
-                </button>
-              </div>
-            </div>
-            <div className={`hero__visual ${isVisible.hero ? 'animate-in' : ''}`}>
-              <div className="hero__decoration">
-                <div>{/* TODO: Prompt: Professional nail salon workspace with modern equipment, nail polish bottles, and tools arranged aesthetically, soft pink lighting, minimalist style, Proporcje: 16:9 */}</div>
-              </div>
+            <h1 className="hero__title">
+              <span className="hero__title-line">Profesjonalny</span>
+              <span className="hero__title-line hero__title-line--accent">manicure</span>
+              <span className="hero__title-line">& pedicure</span>
+            </h1>
+            <p className="hero__subtitle">
+              Odkryj piękno swoich paznokci w salonie Karoliny Nowaczyńskiej. 
+              Profesjonalne usługi, najwyższa jakość i indywidualne podejście.
+            </p>
+            <div className="hero__buttons">
+              <a href="https://booksy.com/pl-pl/71317_nails-karolina-nowaczynska_paznokcie_11597_katowice" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 className="btn btn--primary">
+                Umów wizytę
+              </a>
+              <button onClick={() => scrollToSection('services')} className="btn btn--secondary">
+                Zobacz usługi
+              </button>
             </div>
           </div>
-        </div>
-        <div className="hero__background">
-          <div className="floating-element floating-element--1"></div>
-          <div className="floating-element floating-element--2"></div>
-          <div className="floating-element floating-element--3"></div>
+          <div className="hero__visual">
+            <div>{/* TODO: Prompt: Professional nail salon interior with modern equipment, elegant pink and black color scheme, clean and minimalist design, natural lighting, Proporcje: 9:16 */}</div>
+          </div>
         </div>
       </section>
 
-      <section id="about" className="section about">
+      <section id="about" className="about">
         <div className="about__container">
-          <div className={`about__content ${isVisible.about ? 'animate-in' : ''}`}>
+          <div className="about__content">
             <div className="about__text">
-              <h2 className="section-title">O nas</h2>
+              <h2 className="section__title">O salonie</h2>
               <p className="about__description">
-                Witamy w salonie #Nails Karolina Nowaczyńska – miejscu, gdzie Twoje paznokcie 
-                staną się prawdziwym dziełem sztuki. Z wieloletnim doświadczeniem i pasją do 
-                perfekcji, oferujemy najwyższej jakości usługi manicure i pedicure.
+                Salon #Nails Karolina Nowaczyńska to miejsce, gdzie pasja do piękna spotyka się z profesjonalizmem. 
+                Oferujemy kompleksowe usługi manicure i pedicure, używając najwyższej jakości produktów i nowoczesnych technik.
               </p>
               <div className="about__features">
                 <div className="feature">
                   <div className="feature__icon">✨</div>
-                  <h3 className="feature__title">Profesjonalizm</h3>
-                  <p className="feature__text">Doświadczenie i precyzja w każdym detalu</p>
+                  <div className="feature__content">
+                    <h3 className="feature__title">Profesjonalne produkty</h3>
+                    <p className="feature__description">Używamy tylko sprawdzonych, wysokiej jakości produktów</p>
+                  </div>
                 </div>
                 <div className="feature">
-                  <div className="feature__icon">💎</div>
-                  <h3 className="feature__title">Jakość</h3>
-                  <p className="feature__text">Używamy tylko najlepszych produktów</p>
+                  <div className="feature__icon">💅</div>
+                  <div className="feature__content">
+                    <h3 className="feature__title">Indywidualne podejście</h3>
+                    <p className="feature__description">Każda stylizacja dopasowana do Twoich potrzeb</p>
+                  </div>
                 </div>
                 <div className="feature">
-                  <div className="feature__icon">🎨</div>
-                  <h3 className="feature__title">Kreatywność</h3>
-                  <p className="feature__text">Indywidualne podejście do każdego klienta</p>
+                  <div className="feature__icon">⭐</div>
+                  <div className="feature__content">
+                    <h3 className="feature__title">Doświadczenie</h3>
+                    <p className="feature__description">Lata praktyki i stałe podnoszenie kwalifikacji</p>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="about__visual">
-              <div>{/* TODO: Prompt: Elegant nail art showcase with various decorative nail designs, modern nail salon interior background, soft pastel colors, professional photography, Proporcje: 1:1 */}</div>
+              <div>{/* TODO: Prompt: Professional female nail technician working on client's nails, modern salon setting, pink and black interior, focused and professional atmosphere, Proporcje: 1:1 */}</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="services" className="section services">
+      <section id="services" className="services">
         <div className="services__container">
-          <div className={`services__header ${isVisible.services ? 'animate-in' : ''}`}>
-            <h2 className="section-title">Nasze Usługi</h2>
-            <p className="services__subtitle">
-              Oferujemy pełen zakres usług manicure i pedicure
-            </p>
-          </div>
-          
+          <h2 className="section__title">Nasze usługi</h2>
           <div className="services__grid">
             {services.map((category, categoryIndex) => (
-              <div 
-                key={categoryIndex} 
-                className={`service-category ${isVisible.services ? 'animate-in' : ''}`}
-                style={{ animationDelay: `${categoryIndex * 0.1}s` }}
-              >
+              <div key={categoryIndex} className="service-category" style={{ animationDelay: `${categoryIndex * 0.1}s` }}>
                 <h3 className="service-category__title">{category.category}</h3>
                 <div className="service-category__items">
                   {category.items.map((service, serviceIndex) => (
-                    <div key={serviceIndex} className="service-item">
-                      <div className="service-item__header">
+                    <div key={serviceIndex} className="service-item" style={{ animationDelay: `${(categoryIndex * 0.1) + (serviceIndex * 0.05)}s` }}>
+                      <div className="service-item__content">
                         <h4 className="service-item__name">{service.name}</h4>
-                        <span className="service-item__price">{service.price}</span>
+                        <span className="service-item__time">{service.time}</span>
                       </div>
-                      <div className="service-item__time">{service.time}</div>
+                      <div className="service-item__price">{service.price}</div>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
+          <div className="services__cta">
+            <a href="https://booksy.com/pl-pl/71317_nails-karolina-nowaczynska_paznokcie_11597_katowice" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               className="btn btn--primary btn--large">
+              Zarezerwuj termin online
+            </a>
+          </div>
         </div>
       </section>
 
-      <section id="contact" className="section contact">
+      <section id="contact" className="contact">
         <div className="contact__container">
-          <div className={`contact__content ${isVisible.contact ? 'animate-in' : ''}`}>
+          <div className="contact__content">
             <div className="contact__info">
-              <h2 className="section-title">Kontakt</h2>
+              <h2 className="section__title">Kontakt</h2>
               <div className="contact__details">
                 <div className="contact__item">
                   <div className="contact__icon">📍</div>
-                  <div>
+                  <div className="contact__text">
                     <h3>Adres</h3>
-                    <p>Rolna 18<br />40-555 Katowice</p>
+                    <p>Rolna 18, 40-555 Katowice</p>
                   </div>
                 </div>
                 <div className="contact__item">
                   <div className="contact__icon">📞</div>
-                  <div>
+                  <div className="contact__text">
                     <h3>Telefon</h3>
-                    <p>660 665 702</p>
+                    <a href="tel:660665702">660 665 702</a>
                   </div>
                 </div>
                 <div className="contact__item">
-                  <div className="contact__icon">📱</div>
-                  <div>
-                    <h3>Social Media</h3>
-                    <a href="https://www.instagram.com/nails_karolina_nowaczynska/" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                      Instagram
+                  <div className="contact__icon">📷</div>
+                  <div className="contact__text">
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/nails_karolina_nowaczynska/" target="_blank" rel="noopener noreferrer">
+                      @nails_karolina_nowaczynska
                     </a>
                   </div>
                 </div>
               </div>
-              
-              <div className="opening-hours">
-                <h3>Godziny otwarcia</h3>
-                <div className="hours-list">
-                  {openingHours.map((item, index) => (
-                    <div key={index} className="hours-item">
-                      <span className="hours-day">{item.day}</span>
-                      <span className={`hours-time ${item.hours === 'Zamknięte' ? 'hours-time--closed' : ''}`}>
-                        {item.hours}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="contact__cta">
-                <a href="https://booksy.com/pl-pl/71317_nails-karolina-nowaczynska_paznokcie_11597_katowice" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   className="btn btn--primary btn--large">
-                  Zarezerwuj wizytę przez Booksy
-                </a>
-              </div>
             </div>
-            
-            <div className="contact__map">
-              <div>{/* TODO: Prompt: Modern nail salon storefront exterior view, elegant entrance with glass windows, pink and black color scheme, urban setting in Katowice Poland, Proporcje: 16:9 */}</div>
+            <div className="contact__hours">
+              <h3 className="contact__hours-title">Godziny otwarcia</h3>
+              <div className="opening-hours">
+                {openingHours.map((day, index) => (
+                  <div key={index} className={`opening-hours__day ${day.hours === 'Zamknięte' ? 'opening-hours__day--closed' : ''}`}>
+                    <span className="opening-hours__name">{day.day}</span>
+                    <span className="opening-hours__time">{day.hours}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -289,10 +268,26 @@ const App = () => {
           <div className="footer__content">
             <div className="footer__logo">
               <img src="/logo.png" alt="#Nails Karolina Nowaczyńska" className="footer__logo-img" />
+              <span className="footer__logo-text">#Nails Karolina Nowaczyńska</span>
             </div>
-            <p className="footer__text">
-              © 2024 #Nails Karolina Nowaczyńska. Wszystkie prawa zastrzeżone.
-            </p>
+            <div className="footer__links">
+              <a href="https://booksy.com/pl-pl/71317_nails-karolina-nowaczynska_paznokcie_11597_katowice" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 className="footer__link">
+                Booksy
+              </a>
+              <a href="https://www.instagram.com/nails_karolina_nowaczynska/" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 className="footer__link">
+                Instagram
+              </a>
+              <a href="tel:660665702" className="footer__link">660 665 702</a>
+            </div>
+          </div>
+          <div className="footer__bottom">
+            <p>&copy; 2024 #Nails Karolina Nowaczyńska. Wszystkie prawa zastrzeżone.</p>
           </div>
         </div>
       </footer>
