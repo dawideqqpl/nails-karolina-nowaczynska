@@ -1,7 +1,6 @@
 {
   "short_name": "#Nails Karolina",
-  "name": "#Nails Karolina Nowaczyńska - Salon manicure i pedicure",
-  "description": "Profesjonalny salon manicure i pedicure w Katowicach",
+  "name": "#Nails Karolina Nowaczyńska - Salon Manicure i Pedicure",
   "icons": [
     {
       "src": "favicon.ico",
@@ -23,34 +22,7 @@
   "display": "standalone",
   "theme_color": "#e8c2cf",
   "background_color": "#ffffff",
-  "orientation": "portrait-primary",
+  "description": "Profesjonalny salon manicure i pedicure w Katowicach. Manicure hybrydowy, przedłużanie paznokci, pedicure frezarkowy.",
   "categories": ["beauty", "lifestyle"],
-  "lang": "pl",
-  "scope": "/",
-  "shortcuts": [
-    {
-      "name": "Umów wizytę",
-      "short_name": "Booksy",
-      "description": "Zarezerwuj termin online przez Booksy",
-      "url": "/",
-      "icons": [
-        {
-          "src": "logo192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Kontakt",
-      "short_name": "Kontakt",
-      "description": "Skontaktuj się z salonem",
-      "url": "/#contact",
-      "icons": [
-        {
-          "src": "logo192.png",
-          "sizes": "192x192"
-        }
-      ]
-    }
-  ]
+  "lang": "pl"
 }

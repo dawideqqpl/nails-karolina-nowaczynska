@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* CSS Reset and Base Styles */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -21,12 +20,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Remove default styling */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 img {
@@ -35,39 +62,8 @@ img {
   display: block;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  cursor: pointer;
-}
-
-ul, ol {
-  list-style: none;
-}
-
-input, textarea, select {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: inherit;
-  line-height: 1.2;
-}
-
-p {
-  margin: 0;
-}
-
 /* Utility classes */
-.visually-hidden {
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -77,63 +73,4 @@ p {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
-/* Scroll animations */
-@media (prefers-reduced-motion: no-preference) {
-  [data-aos] {
-    opacity: 0;
-    transition-property: opacity, transform;
-    transition-duration: 0.8s;
-    transition-timing-function: ease;
-  }
-
-  [data-aos].aos-animate {
-    opacity: 1;
-    transform: none;
-  }
-
-  [data-aos="fade-up"] {
-    transform: translateY(30px);
-  }
-
-  [data-aos="fade-down"] {
-    transform: translateY(-30px);
-  }
-
-  [data-aos="fade-left"] {
-    transform: translateX(30px);
-  }
-
-  [data-aos="fade-right"] {
-    transform: translateX(-30px);
-  }
-
-  [data-aos="zoom-in"] {
-    transform: scale(0.9);
-  }
-
-  [data-aos="zoom-out"] {
-    transform: scale(1.1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }

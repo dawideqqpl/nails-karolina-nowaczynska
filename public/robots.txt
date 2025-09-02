@@ -1,41 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://nailskarolinanovaczynska.pl/sitemap.xml
-
-# Disallow crawling of common admin/system directories
-Disallow: /admin/
-Disallow: /wp-admin/
-Disallow: /wp-login.php
-Disallow: /wp-content/uploads/
-Disallow: /*.pdf$
-Disallow: /search
-Disallow: /404
-Disallow: /500
-
-# Allow crawling of important pages
-Allow: /
-Allow: /uslugi
-Allow: /kontakt
-Allow: /o-nas
-
-# Crawl-delay for politeness
-Crawl-delay: 1
-
-# Specific rules for major search engines
-User-agent: Googlebot
-Crawl-delay: 0
-
-User-agent: Bingbot
-Crawl-delay: 1
-
-# Block bad bots
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
+Sitemap: https://nails-karolina.pl/sitemap.xml

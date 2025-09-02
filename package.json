@@ -2,23 +2,10 @@
   "name": "nails-karolina-nowaczynska",
   "version": "0.1.0",
   "private": true,
-  "description": "Profesjonalny salon manicure i pedicure #Nails Karolina Nowaczyńska w Katowicach",
-  "keywords": [
-    "manicure",
-    "pedicure",
-    "hybryda",
-    "żel",
-    "paznokcie",
-    "salon",
-    "Katowice",
-    "beauty",
-    "nails"
-  ],
-  "author": "Karolina Nowaczyńska",
-  "homepage": "https://nailskarolinanovaczynska.pl",
+  "homepage": ".",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,20 +16,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "analyze": "npm run build && npx serve -s build",
-    "lint": "eslint src/**/*.{js,jsx}",
-    "lint:fix": "eslint src/**/*.{js,jsx} --fix"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ],
-    "rules": {
-      "no-unused-vars": "warn",
-      "no-console": "warn"
-    }
+    ]
   },
   "browserslist": {
     "production": [
@@ -56,11 +36,16 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "eslint": "^8.57.0"
-  },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0"
-  }
+  "keywords": [
+    "manicure",
+    "pedicure",
+    "paznokcie",
+    "hybryda",
+    "żel",
+    "katowice",
+    "salon",
+    "beauty"
+  ],
+  "description": "Profesjonalny salon manicure i pedicure #Nails Karolina Nowaczyńska w Katowicach",
+  "author": "Karolina Nowaczyńska"
 }
